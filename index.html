@@ -4,7 +4,7 @@
 		<link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
 		<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-		
+
 		<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
   		<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
 	</head>
@@ -14,15 +14,17 @@
 				<v-main>
 					<v-container>
 						<v-row>
+							<v-col></v-col>
 							<v-col v-for="column in columns" :key="column" class="text-center">
 								<h1>{{ column }}</h1>
 							</v-col>
 						</v-row>
-						<v-row v-for="row in rows" :key="row">
-							<v-col v-for="column in columns" :key="column" class="text-center align-center">
-								<div v-if="show[row] && show[row][column]">
+						<v-row v-for="row in rows" :key="row" class="text-center align-center">
+							<v-col><h1>{{row}}</h1></v-col>
+							<v-col v-for="column in columns" :key="column">
+								<div v-if="show[row] && show[row][column]" class="d-flex align-center justify-center" style="height: 100px">
 									<v-img v-if="shipLocations[(row - 1) * columns.length + columns.indexOf(column)]" aspect-ratio="1" src="battleship.png" height="100"></v-img>
-									<h1 v-else class="red--text"  style="height: 100px;">MISS!!</h1>
+									<h1 v-else class="red--text">MISS!</h1>
 								</div>
 								<v-btn x-large v-else @click="showBehind(row, column)" style="height: 100px; width: 100px;"><h1>{{ row }}</h1></v-btn>
 							</v-col>
