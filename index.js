@@ -10,11 +10,14 @@ var app = new Vue({
   },
   computed: {
   	shipLocations() {
-  		squares = Array.apply(null, Array(this.columns.length * this.rows.length)).map(function () {});
+  		const min = 0;
+  		const max = this.columns.length * this.rows.length - 1;
+
+  		squares = Array.apply(null, Array(max)).map(function () {});
   		for (let i = 0; i < this.numShips; i++) {
   			let index = -1;
   			do {
-				index = Math.floor(Math.random() * (this.columns.length * this.rows.length - 1 + 1) ) + 1;
+				index = Math.floor(Math.random() * (max - min + 1) ) + min;
   			} while (index == -1 || squares[index])
   			squares[index] = true
   		}
