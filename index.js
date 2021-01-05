@@ -2,7 +2,7 @@ var app = new Vue({
   el: '#app',
   vuetify: new Vuetify(),
   data: {
-  	numShips: 6,
+  	numShips: 8,
   	columns: ['Jumping Jacks', 'Squats', 'Push Ups', 'Lunges', 'Star Jumps', 'Shoulder Taps'],
   	rows: [1, 2, 3, 4, 5, 6],
     message: 'Hello Vue!',
