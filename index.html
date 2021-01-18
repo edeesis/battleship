@@ -9,20 +9,49 @@
   		<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
 		
 		<style>
-			.v-data-table.theme--light > .v-data-table__wrapper > table > tbody > tr > td {
+			.fireworks {
+				position: fixed;
+				top: 0;
+				left: 0;
+				min-width: 100%;
+				min-height: 100%;
+			}
+			.top {
+				z-index: 5 !important;
+			}
+			.content {
+			  position: fixed;
+			  background: rgba(0, 0, 0, 0);
+			  color: #f1f1f1;
+			}
+			.transparent {
+				background: rgba(0,0,0,0);
+			}
+			.v-data-table.theme--dark {
+				background: rgba(18, 18, 18, .7) !important;
+			}
+			.v-data-table.theme--dark > .v-data-table__wrapper > table > tbody > tr > td {
 				border-bottom: 0 !important;
 			}
-			
-			.v-data-table.theme--light > .v-data-table__wrapper > table > tbody > tr:hover {
-				background: #fff !important;
+			.v-data-table.theme--dark > .v-data-table__wrapper > table > tbody > tr:hover {
+				background-color: transparent !important;
 			}
 		</style>
 	</head>
 	<body>
 		<div id="app">
+			<div v-if="finished">
+				<video autoplay muted loop class="fireworks">
+					<source src="fireworks.mp4" type="video/mp4">
+				</video>
+			</div>
 			<v-app>
 				<v-main>
 					<v-container>
+						<div v-if="finished" class="text-center mb-4">
+							<h1 class="white--text">You did it! You got all {{ numShips }} ships, while only missing {{ numMissed }} times! Great job!</h1>
+							<v-btn class="mt-4" x-large @click="refresh()">Click here to play again!</v-btn>
+						</div>
 						<v-simple-table>
 							<template #default>
 								<thead>
@@ -35,13 +64,13 @@
 								</thead>
 								<tbody>
 									<tr v-for="row in rows" :key="row" class="text-center align-center">
-										<td><h2>{{row}}</h2></td>
+										<td><h2 class="text--primary">{{row}}</h2></td>
 										<td v-for="column in columns" :key="column" class="py-2">
 											<div v-if="show[row] && show[row][column]" class="d-flex align-center justify-center" style="height: 70px;">
 												<img v-if="shipLocations[(row - 1) * columns.length + columns.indexOf(column)]" aspect-ratio="1" src="battleship.png" height="70" width="70"></img>
 												<h2 v-else class="red--text">MISS!</h2>
 											</div>
-											<v-btn large v-else @click="showBehind(row, column)" style="height: 70px;"><h1>{{ row }}</h1></v-btn>
+											<v-btn large :disabled="finished" v-else @click="showBehind(row, column)" style="height: 70px;"><h1>{{ row }}</h1></v-btn>
 										</td>
 									</tr>
 								</tbody>

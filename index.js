@@ -1,12 +1,16 @@
 var app = new Vue({
   el: '#app',
-  vuetify: new Vuetify(),
+  vuetify: new Vuetify({
+	  theme: { dark: true }
+  }),
   data: {
   	numShips: 8,
   	columns: ['Jumping Jacks', 'Squats', 'Push Ups', 'Lunges', 'Star Jumps', 'Shoulder Taps'],
   	rows: [1, 2, 3, 4, 5, 6],
     message: 'Hello Vue!',
     show: {},
+	numShown: 0,
+	numMissed: 0
   },
   computed: {
   	shipLocations() {
@@ -21,9 +25,11 @@ var app = new Vue({
   			} while (index == -1 || squares[index])
   			squares[index] = true
   		}
-  		console.log(squares);
   		return squares;
-  	}
+  	},
+	finished () {
+		return this.numShown === this.numShips;
+	}
   },
   methods: {
   	showBehind(row, column) {
@@ -31,6 +37,14 @@ var app = new Vue({
   			this.$set(this.show, row, {})
   		}
   		this.$set(this.show[row], column, true)
-  	}
+		if (this.shipLocations[(row - 1) * this.columns.length + this.columns.indexOf(column)]) {
+			this.numShown++;
+		} else {
+			this.numMissed++;
+		}
+  	},
+	refresh() {
+		window.location.reload();
+	}
   }
 })
