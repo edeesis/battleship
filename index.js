@@ -9,7 +9,8 @@ var app = new Vue({
   	rows: [1, 2, 3, 4, 5, 6],
     message: 'Hello Vue!',
     show: {},
-	  numClicks: 0,
+	  numShown: 0,
+	  numMissed: 0
   },
   computed: {
   	shipLocations() {
@@ -36,7 +37,11 @@ var app = new Vue({
   			this.$set(this.show, row, {})
   		}
   		this.$set(this.show[row], column, true)
-      this.numClicks++
+		if (this.shipLocations[(row - 1) * this.columns.length + this.columns.indexOf(column)]) {
+			this.numShown++;
+		} else {
+			this.numMissed++;
+		}
   	},
 	refresh() {
 		window.location.reload();
