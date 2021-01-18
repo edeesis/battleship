@@ -19,6 +19,9 @@
 			.top {
 				z-index: 5 !important;
 			}
+			.hidden {
+				visibility: hidden
+			}
 			.content {
 			  position: fixed;
 			  background: rgba(0, 0, 0, 0);
@@ -48,7 +51,7 @@
 			<v-app>
 				<v-main>
 					<v-container>
-						<div v-if="finished" class="text-center mb-4">
+						<div class="text-center mb-4" :class="{ 'hidden': !finished }">
 							<h1 class="white--text">You did it! You got all {{ numShips }} ships, while only missing {{ numMissed }} times! Great job!</h1>
 							<v-btn class="mt-4" x-large @click="refresh()">Click here to play again!</v-btn>
 						</div>
