@@ -51,7 +51,7 @@
 			<v-app>
 				<v-main>
 					<v-container>
-						<div class="text-center mb-4" :class="{ 'hidden': !finished }">
+						<div class="text-center mb-4" v-if="finished">
 							<h1 class="white--text">You did it! You got all {{ numShips }} ships, while only missing {{ numMissed }} times! Great job!</h1>
 							<v-btn class="mt-4" x-large @click="refresh()">Click here to play again!</v-btn>
 						</div>
