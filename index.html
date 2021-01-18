@@ -52,7 +52,9 @@
 				<v-main>
 					<v-container>
 						<div class="text-center mb-4" v-if="finished">
-							<h1 class="white--text">You did it! You got all {{ numShips }} ships, while only missing {{ numMissed }} times! Great job!</h1>
+							<h1 class="white--text">You did it!</h1>
+							<h1 class="white--text">Your score: {{ numMisses + numShips }}.</h1>
+							<h1 class="white--text">See if you can beat your score.</h1>
 							<v-btn class="mt-4" x-large @click="refresh()">Click here to play again!</v-btn>
 						</div>
 						<v-simple-table>
