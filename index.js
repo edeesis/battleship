@@ -7,8 +7,8 @@ var app = new Vue({
   	numShips: 8,
     message: 'Hello Vue!',
     show: {},
-	numShown: 0,
-	numMissed: 0
+	  numShown: 0,
+	  numMissed: 0
   },
   computed: {
 	rows() {
