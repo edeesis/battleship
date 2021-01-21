@@ -37,10 +37,10 @@ var app = new Vue({
   			} while (index == -1 || squares[index])
   			squares[index] = true
   		}
-		console.log(squares);
   		return squares;
   	},
 	finished () {
+		console.log(this.numShown)
 		return this.numShown === this.numShips;
 	}
   },
