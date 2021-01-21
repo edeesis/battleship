@@ -5,14 +5,26 @@ var app = new Vue({
   }),
   data: {
   	numShips: 8,
-  	columns: ['Jumping Jacks', 'Squats', 'Push Ups', 'Lunges', 'Star Jumps', 'Shoulder Taps'],
-  	rows: [1, 2, 3, 4, 5, 6],
     message: 'Hello Vue!',
     show: {},
 	numShown: 0,
 	numMissed: 0
   },
   computed: {
+	rows() {
+		if (window.location.search) {
+			return [2, 4, 6, 8, 10]
+		} else {
+			return [1, 2, 3, 4, 5, 6]
+		}
+	},
+	columns() {
+		if (window.location.search) {
+			return ['Mountain Climbers', 'High Knees', 'Crab Kicks', 'Arm Circles', 'Windmills', 'Frog Jumps']
+		} else {
+			return ['Jumping Jacks', 'Squats', 'Push Ups', 'Lunges', 'Star Jumps', 'Shoulder Taps']
+		}
+	},
   	shipLocations() {
   		const min = 0;
   		const max = this.columns.length * this.rows.length - 1;
