@@ -7,8 +7,8 @@ var app = new Vue({
   	numShips: 8,
     message: 'Hello Vue!',
     show: {},
-	  numShown: 0,
-	  numMissed: 0
+	numShown: 0,
+	numMissed: 0
   },
   computed: {
 	rows() {
@@ -37,6 +37,7 @@ var app = new Vue({
   			} while (index == -1 || squares[index])
   			squares[index] = true
   		}
+		console.log(squares);
   		return squares;
   	},
 	finished () {
@@ -49,7 +50,7 @@ var app = new Vue({
   			this.$set(this.show, row, {})
   		}
   		this.$set(this.show[row], column, true)
-		if (this.shipLocations[(row - 1) * this.columns.length + this.columns.indexOf(column)]) {
+		if (this.shipLocations[this.rows.indexOf(row) * this.columns.length + this.columns.indexOf(column)]) {
 			this.numShown++;
 		} else {
 			this.numMissed++;

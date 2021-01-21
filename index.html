@@ -72,7 +72,7 @@
 										<td><h2 class="text--primary">{{row}}</h2></td>
 										<td v-for="column in columns" :key="column" class="py-2">
 											<div v-if="show[row] && show[row][column]" class="d-flex align-center justify-center" style="height: 70px;">
-												<img v-if="shipLocations[(row - 1) * columns.length + columns.indexOf(column)]" aspect-ratio="1" src="battleship.png" height="70" width="70"></img>
+												<img v-if="shipLocations[rows.indexOf(row) * columns.length + columns.indexOf(column)]" aspect-ratio="1" src="battleship.png" height="70" width="70"></img>
 												<h2 v-else class="red--text">MISS!</h2>
 											</div>
 											<v-btn large :disabled="finished" v-else @click="showBehind(row, column)" style="height: 70px;"><h1>{{ row }}</h1></v-btn>
